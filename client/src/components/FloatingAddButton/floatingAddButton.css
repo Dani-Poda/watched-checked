@@ -1,0 +1,8 @@
+.addButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  width: 64px;
+  height: 64px;
+  z-index: 1000;
+}
