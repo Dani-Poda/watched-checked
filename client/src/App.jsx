@@ -13,8 +13,10 @@ function App() {
     setShowModal(false);
   }
 
-  const handleSave = ()=> {
-    setShowModal(false);
+  const handleSave = (movieData, file) => {
+    console.log('Datos película:', movieData)
+    console.log('Archivo:', file)
+    setShowModal(false)
   }
 
   return (
