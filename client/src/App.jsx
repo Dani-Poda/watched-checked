@@ -1,6 +1,7 @@
+import { useState } from 'react'
 import { FloatingAddButton } from "./components/FloatingAddButton/FloatingAddButton";
 import { AddMovieModal } from "./components/AddMovieModal/AddMovieModal";
-import { useState } from "react";
+import { moviesAPI } from './services/api';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -9,14 +10,22 @@ function App() {
     setShowModal(true);
   }
 
-  const handleClose = ()=>{
+  const handleClose = () => {
     setShowModal(false);
   }
 
-  const handleSave = (movieData, file) => {
-    console.log('Datos película:', movieData)
-    console.log('Archivo:', file)
-    setShowModal(false)
+  const handleSave = async (movieData, file) => {
+    try {
+      const response = await moviesAPI.createMovie(movieData, file);
+      
+      console.log('✅ Película creada:', response.data);
+      alert('¡Película guardada exitosamente!');
+      setShowModal(false);
+      
+    } catch (error) {
+      console.error('❌ Error:', error);
+      alert('Error al guardar la película');
+    }
   }
 
   return (
@@ -24,7 +33,11 @@ function App() {
       <h1 className="text-center">Watched & Checked</h1>
 
       <FloatingAddButton onClick={handleAdd} />
-      <AddMovieModal show={showModal} onClose={handleClose} onSave={handleSave}/>
+      <AddMovieModal 
+        show={showModal} 
+        onClose={handleClose} 
+        onSave={handleSave}
+      />
     </div>
   )
 }
