@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { FloatingAddButton } from "./components/FloatingAddButton/FloatingAddButton";
 import { AddMovieModal } from "./components/AddMovieModal/AddMovieModal";
 import { moviesAPI } from './services/api';
+import { MovieGrid } from './components/MovieGrid/MovieGrid';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
+  const [movies, setMovies] = useState([]);
 
   const handleAdd = () => {
     setShowModal(true);
@@ -28,6 +30,19 @@ function App() {
     }
   }
 
+  const fetchMovies = async()=> {
+    try {
+      const response = await moviesAPI.getAll();
+      setMovies(response.data);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  }
+
+  useEffect(()=>{
+    fetchMovies();
+  },[])
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Watched & Checked</h1>
@@ -38,6 +53,7 @@ function App() {
         onClose={handleClose} 
         onSave={handleSave}
       />
+      <MovieGrid movies={movies}/>
     </div>
   )
 }
