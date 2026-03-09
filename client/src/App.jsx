@@ -3,10 +3,13 @@ import { FloatingAddButton } from "./components/FloatingAddButton/FloatingAddBut
 import { AddMovieModal } from "./components/AddMovieModal/AddMovieModal";
 import { moviesAPI } from './services/api';
 import { MovieGrid } from './components/MovieGrid/MovieGrid';
+import { MovieDetailModal } from './components/MovieDetailModal/MovieDetailModal';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState([])
+  const [showDetailModal, setShowDetailModal] = useState(false)
+  const [selectedMovie, setSelectedMovie] = useState();
 
   const handleAdd = () => {
     setShowModal(true);
@@ -22,6 +25,8 @@ function App() {
       
       console.log('✅ Película creada:', response.data);
       alert('¡Película guardada exitosamente!');
+
+      await fetchMovies();
       setShowModal(false);
       
     } catch (error) {
@@ -43,6 +48,15 @@ function App() {
     fetchMovies();
   },[])
 
+  const handleCardClick = (movie)=> {
+    setSelectedMovie(movie);
+    setShowDetailModal(true);
+  }
+
+  const handleCloseDetail = ()=> {
+    setShowDetailModal(false);
+  }
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Watched & Checked</h1>
@@ -53,7 +67,15 @@ function App() {
         onClose={handleClose} 
         onSave={handleSave}
       />
-      <MovieGrid movies={movies}/>
+      <MovieGrid movies={movies} onCardClick={handleCardClick}/>
+
+      {selectedMovie && 
+        <MovieDetailModal 
+          show={showDetailModal}
+          onClose={handleCloseDetail}
+          movie= {selectedMovie}
+        />
+      }
     </div>
   )
 }

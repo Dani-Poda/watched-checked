@@ -1,10 +1,14 @@
 import { Card } from "react-bootstrap"
 
 
-export const MovieCard = ({movie}) => {
+export const MovieCard = ({movie, onClick}) => {
   return (
     <>
-      <Card className="h-100">
+      <Card 
+        className="h-100"
+        onClick={() => onClick(movie)}
+        style={{ cursor: 'pointer' }}
+      >
         {movie.poster ? (
           <Card.Img variant="top" src={`http://localhost:4000${movie.poster}`} />
         ) : (
@@ -15,9 +19,9 @@ export const MovieCard = ({movie}) => {
         <Card.Body>
           <Card.Title>{movie.title}</Card.Title>
           <Card.Text>
-            <div>Tipo: {movie.type === 1 ? 'Película' : 'Serie'}</div>
-            <div>Año: {movie.year_published}</div>
-            <div>⭐ {movie.rating}/10</div>
+            <span>Tipo: {movie.type === 1 ? 'Película' : 'Serie'}</span>
+            <span>Año: {movie.year_published}</span>
+            <span>⭐ {movie.rating}/10</span>
           </Card.Text>
         </Card.Body>
       </Card>
