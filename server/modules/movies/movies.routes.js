@@ -8,4 +8,6 @@ router.get('/', moviesControllers.getAll);
 
 router.post('/', uploadImageSingle('posters'), moviesControllers.createMovie);
 
+router.put('/:movie_id', uploadImageSingle('posters'), moviesControllers.editMovie);
+
 export default router;

@@ -25,6 +25,24 @@ class MoviesController {
       res.status(500).json({message:"error de server"});
     }
   }
+
+  editMovie = async(req, res)=>{
+    try {
+      const{ movie_id} = req.params;
+      const data = req.body;
+
+      if(req.file){
+        data.poster = `/uploads/posters/${req.file.filename}`
+      }
+
+     data.movie_id = movie_id;
+
+      const result = await moviesDal.editMovie(data);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({message:"error de server"});
+    }
+  }
 }
 
 export default new MoviesController();
