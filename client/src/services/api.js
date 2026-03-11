@@ -23,5 +23,25 @@ export const moviesAPI = {
         'Content-Type': 'multipart/form-data'
       }
     });
+  },
+  
+  editMovie: (movieData, file) => {
+    const formData = new FormData();
+
+    Object.keys(movieData).forEach(key => {
+      if (key !== 'movie_id') {
+        formData.append(key, movieData[key]);
+      }
+    });
+
+    if (file) {
+      formData.append('poster', file);
+    }
+
+    return api.put(`/movies/${movieData.movie_id}`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
   }
 };

@@ -10,6 +10,7 @@ function App() {
   const [movies, setMovies] = useState([])
   const [showDetailModal, setShowDetailModal] = useState(false)
   const [selectedMovie, setSelectedMovie] = useState();
+  const [movieToEdit, setMovieToEdit] = useState(null);
 
   const handleAdd = () => {
     setShowModal(true);
@@ -17,22 +18,36 @@ function App() {
 
   const handleClose = () => {
     setShowModal(false);
+    setMovieToEdit(null);
   }
 
   const handleSave = async (movieData, file) => {
     try {
-      const response = await moviesAPI.createMovie(movieData, file);
-      
-      console.log('✅ Película creada:', response.data);
-      alert('¡Película guardada exitosamente!');
+
+      if (movieToEdit) {
+        // Modo edición
+        await moviesAPI.editMovie(movieData, file);
+        alert('¡Película actualizada!');
+      } else {
+        // Modo creación
+        await moviesAPI.createMovie(movieData, file);
+        alert('¡Película guardada!');
+      }
 
       await fetchMovies();
       setShowModal(false);
+      setMovieToEdit(null);
       
     } catch (error) {
       console.error('❌ Error:', error);
       alert('Error al guardar la película');
     }
+  }
+
+  const handleEdit = async(movie)=> {
+      setMovieToEdit(movie);
+      setShowDetailModal(false);
+      setShowModal(true);
   }
 
   const fetchMovies = async()=> {
@@ -66,6 +81,7 @@ function App() {
         show={showModal} 
         onClose={handleClose} 
         onSave={handleSave}
+        movieToEdit={movieToEdit} 
       />
       <MovieGrid movies={movies} onCardClick={handleCardClick}/>
 
@@ -74,6 +90,7 @@ function App() {
           show={showDetailModal}
           onClose={handleCloseDetail}
           movie= {selectedMovie}
+          onEdit={handleEdit}
         />
       }
     </div>

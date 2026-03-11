@@ -1,6 +1,6 @@
 import {Button, Modal} from 'react-bootstrap';
 
-export const MovieDetailModal = ({show, onClose, movie}) => {
+export const MovieDetailModal = ({show, onClose, movie, onEdit}) => {
   if (!movie) return null;
 
   return (
@@ -44,6 +44,7 @@ export const MovieDetailModal = ({show, onClose, movie}) => {
         </Modal.Body>
 
         <Modal.Footer>
+          <Button variant="primary" onClick={() => onEdit(movie)}>Editar</Button>
           <Button variant="secondary" onClick={onClose}>Close</Button>
         </Modal.Footer>
       </Modal>

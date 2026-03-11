@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {Modal, Button, Form} from 'react-bootstrap';
 
 const initialValue = {
@@ -14,8 +14,8 @@ const initialValue = {
   status: 1
 }
 
-export const AddMovieModal = ({show, onClose, onSave}) => {
-  const [movieData, setMovieData] = useState(initialValue);
+export const AddMovieModal = ({show, onClose, onSave, movieToEdit}) => {
+  const [movieData, setMovieData] = useState(movieToEdit || initialValue);
   const [file, setFile] = useState();
 
   const handleChange = (e)=> {
@@ -33,11 +33,27 @@ export const AddMovieModal = ({show, onClose, onSave}) => {
     onSave(movieData, file)
   }
 
+  useEffect(() => {
+    if (movieToEdit) {
+      const cleanedData = Object.keys(movieToEdit).reduce((acc, key) => {
+        acc[key] = movieToEdit[key] === null ? "" : movieToEdit[key];
+        return acc;
+      }, {});
+      setMovieData(cleanedData);
+      setFile(null);
+    } else {
+      setMovieData(initialValue);
+      setFile(null);
+    }
+  }, [movieToEdit, show]);
+
   return (
     <>
       <Modal show={show} onHide={onClose} size="lg" centered>
         <Modal.Header closeButton>
-          <Modal.Title>Añadir película o serie</Modal.Title>
+          <Modal.Title>
+            {movieToEdit ? "Editar película o serie" : "Añadir película o serie"}
+          </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -169,7 +185,7 @@ export const AddMovieModal = ({show, onClose, onSave}) => {
             
             <div className="d-flex justify-content-end gap-2">
               <Button variant="secondary" onClick={onClose}>Cancelar</Button>
-              <Button variant="primary" type="submit">Guardar</Button>
+              <Button variant="primary" type="submit">{movieToEdit ? "Actualizar" : "Guardar"}</Button>
             </div>
           </Form>
         </Modal.Body>
