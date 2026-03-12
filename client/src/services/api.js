@@ -43,5 +43,7 @@ export const moviesAPI = {
         'Content-Type': 'multipart/form-data'
       }
     });
-  }
+  },
+
+  deleteMovie: (movie_id)=> api.delete(`/movies/${movie_id}`)
 };

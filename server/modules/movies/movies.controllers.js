@@ -43,6 +43,17 @@ class MoviesController {
       res.status(500).json({message:"error de server"});
     }
   }
+
+  deleteMovie = async(req, res)=> {
+    try {
+      const {movie_id} = req.params;
+
+      const result = await moviesDal.deleteMovie(movie_id);
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({message:"error de server"});
+    }
+  }
 }
 
 export default new MoviesController();

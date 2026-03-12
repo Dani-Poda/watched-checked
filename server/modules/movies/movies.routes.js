@@ -10,4 +10,6 @@ router.post('/', uploadImageSingle('posters'), moviesControllers.createMovie);
 
 router.put('/:movie_id', uploadImageSingle('posters'), moviesControllers.editMovie);
 
+router.delete('/:movie_id', moviesControllers.deleteMovie);
+
 export default router;

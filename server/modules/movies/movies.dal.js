@@ -73,6 +73,16 @@ class MoviesDal {
       throw {message: "Error en bd"};
     }
   }
+
+  deleteMovie = async(movie_id)=> {
+    try {
+      let sql = "DELETE FROM Movie_Serie WHERE movie_id = ?";
+      let result = await executeQuery(sql, [movie_id]);
+      return result;
+    } catch (error) {
+      throw {message: "Error en bd"};
+    }
+  }
 };
 
 export default new MoviesDal();

@@ -72,6 +72,21 @@ function App() {
     setShowDetailModal(false);
   }
 
+  const handleDelete = async(movie_id)=> {
+    if (!window.confirm('¿Estás seguro de eliminar esta película?')) {
+    return;
+  }
+    try {
+      await moviesAPI.deleteMovie(movie_id);
+      alert('Película o serie borrada');
+      await fetchMovies();
+      setShowDetailModal(false);
+    } catch (error) {
+      console.log('Error:', error);
+      alert('Error al eliminar');
+    }
+  }
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Watched & Checked</h1>
@@ -91,6 +106,7 @@ function App() {
           onClose={handleCloseDetail}
           movie= {selectedMovie}
           onEdit={handleEdit}
+          onDelete={handleDelete}
         />
       }
     </div>
