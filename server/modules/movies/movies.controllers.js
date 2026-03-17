@@ -19,9 +19,14 @@ class MoviesController {
         data.poster = `/uploads/posters/${req.file.filename}`
       }
 
+      if (data.genres) {
+        data.genres = JSON.parse(data.genres);
+      }
+
       const result = await moviesDal.createMovie(data);
       res.status(201).json(result);
     } catch (error) {
+      console.error('Error completo:', error); 
       res.status(500).json({message:"error de server"});
     }
   }
@@ -33,6 +38,10 @@ class MoviesController {
 
       if(req.file){
         data.poster = `/uploads/posters/${req.file.filename}`
+      }
+
+      if (data.genres) {
+        data.genres = JSON.parse(data.genres);
       }
 
      data.movie_id = movie_id;

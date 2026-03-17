@@ -14,9 +14,10 @@ const initialValue = {
   status: 1
 }
 
-export const AddMovieModal = ({show, onClose, onSave, movieToEdit}) => {
+export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
   const [movieData, setMovieData] = useState(movieToEdit || initialValue);
   const [file, setFile] = useState();
+  const [selectedGenres, setSelectedGenres] = useState([]);
 
   const handleChange = (e)=> {
     const {name, value} = e.target;
@@ -28,9 +29,17 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit}) => {
     setFile(selectedFile);
   }
 
+  const handleGenreChange = (genreId) => {
+    if (selectedGenres.includes(genreId)) {
+      setSelectedGenres(selectedGenres.filter(id => id !== genreId));
+    } else {
+      setSelectedGenres([...selectedGenres, genreId]);
+    }
+  }
+
   const handleSubmit = (e)=> {
     e.preventDefault();
-    onSave(movieData, file)
+    onSave(movieData, file, selectedGenres)
   }
 
   useEffect(() => {
@@ -41,11 +50,14 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit}) => {
       }, {});
       setMovieData(cleanedData);
       setFile(null);
+      //setSelectedGenres(movieToEdit.genres || [])
     } else {
       setMovieData(initialValue);
       setFile(null);
     }
   }, [movieToEdit, show]);
+
+
 
   return (
     <>
@@ -172,7 +184,24 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit}) => {
               />
             </Form.Group>
 
-            <Form.Group className="mb-3" controlId="title">
+            
+            <Form.Group className="mb-3" controlId="genre">
+              <Form.Label>Géneros</Form.Label>
+              <div>
+                {genres.map(genre => (
+                  <Form.Check 
+                    key={genre.genre_id}
+                    type="checkbox"
+                    id={`genre-${genre.genre_id}`}
+                    label={genre.genre_name}
+                    checked={selectedGenres.includes(genre.genre_id)}
+                    onChange={() => handleGenreChange(genre.genre_id)}
+                  />
+                ))}
+              </div>
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="status">
               <Form.Label>Estado</Form.Label>
               <Form.Select onChange={handleChange} value={movieData.status} name="status" id="status">
                 <option>Selecciona el estado</option>

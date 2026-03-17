@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import cors from 'cors';
 
 import moviesRoutes from './modules/movies/movies.routes.js'
+import genresRoutes from './modules/genres/genres.routes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename)
@@ -22,6 +23,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.use('/api/movies', moviesRoutes);
+app.use('/api/genres', genresRoutes);
 
 
 export default app;
+

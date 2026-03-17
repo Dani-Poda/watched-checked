@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { FloatingAddButton } from "./components/FloatingAddButton/FloatingAddButton";
 import { AddMovieModal } from "./components/AddMovieModal/AddMovieModal";
-import { moviesAPI } from './services/api';
+import { moviesAPI, genresAPI } from './services/api';
 import { MovieGrid } from './components/MovieGrid/MovieGrid';
 import { MovieDetailModal } from './components/MovieDetailModal/MovieDetailModal';
 
@@ -11,6 +11,7 @@ function App() {
   const [showDetailModal, setShowDetailModal] = useState(false)
   const [selectedMovie, setSelectedMovie] = useState();
   const [movieToEdit, setMovieToEdit] = useState(null);
+  const [genres, setGenres] = useState([]);
 
   const handleAdd = () => {
     setShowModal(true);
@@ -21,16 +22,16 @@ function App() {
     setMovieToEdit(null);
   }
 
-  const handleSave = async (movieData, file) => {
+  const handleSave = async (movieData, file, selectedGenres) => {
     try {
 
       if (movieToEdit) {
         // Modo edición
-        await moviesAPI.editMovie(movieData, file);
+        await moviesAPI.editMovie(movieData, file, selectedGenres);
         alert('¡Película actualizada!');
       } else {
         // Modo creación
-        await moviesAPI.createMovie(movieData, file);
+        await moviesAPI.createMovie(movieData, file, selectedGenres);
         alert('¡Película guardada!');
       }
 
@@ -61,6 +62,7 @@ function App() {
 
   useEffect(()=>{
     fetchMovies();
+    fetchGenres();
   },[])
 
   const handleCardClick = (movie)=> {
@@ -87,6 +89,15 @@ function App() {
     }
   }
 
+  const fetchGenres = async()=> {
+    try {
+      const response = await genresAPI.getAll();
+      setGenres(response.data);
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  }
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Watched & Checked</h1>
@@ -97,6 +108,7 @@ function App() {
         onClose={handleClose} 
         onSave={handleSave}
         movieToEdit={movieToEdit} 
+        genres={genres} 
       />
       <MovieGrid movies={movies} onCardClick={handleCardClick}/>
 
