@@ -27,6 +27,12 @@ export const MovieDetailModal = ({show, onClose, movie, onEdit, onDelete}) => {
                 <p><strong>Temporadas:</strong> {movie.seasons}</p>
               )}
 
+              {movie.genres && movie.genres.length > 0 && (
+                <p>
+                  <strong>Géneros:</strong> {movie.genres.map(g => g.genre_name).join(', ')}
+                </p>
+              )}
+
               {movie.synopsis && <p><strong>Sinopsis:</strong> {movie.synopsis}</p>}
               {movie.notes && <p><strong>Notas:</strong> {movie.notes}</p>}
               

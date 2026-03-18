@@ -50,7 +50,13 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
       }, {});
       setMovieData(cleanedData);
       setFile(null);
-      //setSelectedGenres(movieToEdit.genres || [])
+      
+      if (movieToEdit.genres && movieToEdit.genres.length > 0) {
+        const genreIds = movieToEdit.genres.map(g => g.genre_id);
+        setSelectedGenres(genreIds);
+      } else {
+        setSelectedGenres([]);
+      }
     } else {
       setMovieData(initialValue);
       setFile(null);

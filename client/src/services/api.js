@@ -33,7 +33,7 @@ export const moviesAPI = {
     const formData = new FormData();
 
     Object.keys(movieData).forEach(key => {
-      if (key !== 'movie_id') {
+      if (key !== 'movie_id' && key !== 'genres') {
         formData.append(key, movieData[key]);
       }
     });

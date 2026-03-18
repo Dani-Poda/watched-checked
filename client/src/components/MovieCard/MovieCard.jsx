@@ -21,6 +21,11 @@ export const MovieCard = ({movie, onClick}) => {
           <Card.Text>
             <span>Tipo: {movie.type === 1 ? 'Película' : 'Serie'}</span>
             <span>Año: {movie.year_published}</span>
+            {movie.genres && movie.genres.length > 0 && (
+              <>
+                <span>Géneros: {movie.genres.map(g => g.genre_name).join(', ')}</span><br/>
+              </>
+            )}
             <span>⭐ {movie.rating}/10</span>
           </Card.Text>
         </Card.Body>

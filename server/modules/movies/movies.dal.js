@@ -5,8 +5,15 @@ class MoviesDal {
   getAll = async()=>{
     try {
       let sql = "SELECT * FROM Movie_Serie ORDER BY movie_id DESC";
-      let result = await executeQuery(sql);
-      return result;
+      let movies = await executeQuery(sql);
+
+      for (let movie of movies){
+        let genresSQL = "SELECT Genre.genre_id, Genre.genre_name FROM Genre LEFT JOIN Genre_Movie ON Genre.genre_id = Genre_Movie.genre_id WHERE Genre_Movie.movie_id = ?";
+        let genres = await executeQuery(genresSQL, [movie.movie_id]);
+        movie.genres = genres;
+      }
+
+      return movies;
     } catch (error) {
       throw {message: "Error en bd"};
     }

@@ -20,36 +20,43 @@ class MoviesController {
       }
 
       if (data.genres) {
-        data.genres = JSON.parse(data.genres);
+        if (typeof data.genres === 'string') {
+          data.genres = JSON.parse(data.genres);
+        }
       }
 
       const result = await moviesDal.createMovie(data);
       res.status(201).json(result);
     } catch (error) {
-      console.error('Error completo:', error); 
       res.status(500).json({message:"error de server"});
     }
   }
 
-  editMovie = async(req, res)=>{
+  editMovie = async(req, res) => {
     try {
-      const{ movie_id} = req.params;
+      const { movie_id } = req.params;
       const data = req.body;
 
-      if(req.file){
-        data.poster = `/uploads/posters/${req.file.filename}`
+      if (req.file) {
+        data.poster = `/uploads/posters/${req.file.filename}`;
       }
 
       if (data.genres) {
-        data.genres = JSON.parse(data.genres);
+        if (typeof data.genres === 'string') {
+          data.genres = JSON.parse(data.genres);
+        }
+        
+        if (data.genres.length > 0 && typeof data.genres[0] === 'object') {
+          data.genres = data.genres.map(g => g.genre_id);
+        }
       }
 
-     data.movie_id = movie_id;
+      data.movie_id = movie_id;
 
       const result = await moviesDal.editMovie(data);
       res.status(200).json(result);
     } catch (error) {
-      res.status(500).json({message:"error de server"});
+      res.status(500).json({message: "error de server"});
     }
   }
 
