@@ -4,6 +4,7 @@ import { AddMovieModal } from "./components/AddMovieModal/AddMovieModal";
 import { moviesAPI, genresAPI } from './services/api';
 import { MovieGrid } from './components/MovieGrid/MovieGrid';
 import { MovieDetailModal } from './components/MovieDetailModal/MovieDetailModal';
+import { Filters } from './components/Filters/Filters';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -12,6 +13,9 @@ function App() {
   const [selectedMovie, setSelectedMovie] = useState();
   const [movieToEdit, setMovieToEdit] = useState(null);
   const [genres, setGenres] = useState([]);
+  const [filterType, setFilterType] = useState('');
+  const [filterStatus, setFilterStatus] = useState('');
+  const [sortBy, setSortBy] = useState('newest');
 
   const handleAdd = () => {
     setShowModal(true);
@@ -98,6 +102,37 @@ function App() {
     }
   }
 
+  const getFilteredMovies = () => {
+    let filtered = [...movies];  // Copiar array
+
+    // Filtrar por tipo
+    if (filterType && filterType !== '') {
+      filtered = filtered.filter(m => m.type === parseInt(filterType));
+    }
+    
+    // Filtrar por estado
+    if (filterStatus && filterStatus !== '') {
+      filtered = filtered.filter(m => m.status === parseInt(filterStatus));
+    }
+    
+    // Ordenar
+    if (sortBy === 'newest') {
+      filtered.sort((a, b) => b.movie_id - a.movie_id);
+    } else if (sortBy === 'oldest') {
+      filtered.sort((a, b) => a.movie_id - b.movie_id);
+    } else if (sortBy === 'rating-high') {
+      filtered.sort((a, b) => b.rating - a.rating);
+    } else if (sortBy === 'rating-low') {
+      filtered.sort((a, b) => a.rating - b.rating);
+    } else if (sortBy === 'year_published-high') {
+      filtered.sort((a, b) => b.year_published - a.year_published);
+    }else if (sortBy === 'year_published-low') {
+      filtered.sort((a, b) => a.year_published -b.year_published);
+    }
+    
+    return filtered;
+  }
+
   return (
     <div className="container mt-5">
       <h1 className="text-center">Watched & Checked</h1>
@@ -110,7 +145,10 @@ function App() {
         movieToEdit={movieToEdit} 
         genres={genres} 
       />
-      <MovieGrid movies={movies} onCardClick={handleCardClick}/>
+
+      <Filters onTypeChange={setFilterType} onStatusChange={setFilterStatus} onSortChange={setSortBy}/>
+
+      <MovieGrid movies={getFilteredMovies()} onCardClick={handleCardClick}/>
 
       {selectedMovie && 
         <MovieDetailModal 
