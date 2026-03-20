@@ -1,0 +1,46 @@
+.movie-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+  height: 310px;  /* Altura total fija */
+  display: flex;
+  flex-direction: column;
+  border: none;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+
+  .movie-card-poster {
+    height: 300px; 
+    flex-shrink: 0;
+    width: 100%;
+    object-fit: cover; 
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  .movie-card-body {
+  flex: 1;  
+    overflow: hidden;
+    padding: 1rem;
+  }
+
+  .movie-card-title{
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  
+  /* Limitar a 2 líneas */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;  /* Máximo 2 líneas */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  }
+
+  .movie-card-info {
+    font-size: 0.9rem;
+    color: #666;
+  }
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+}

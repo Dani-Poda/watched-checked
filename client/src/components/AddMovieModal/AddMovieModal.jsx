@@ -60,6 +60,7 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
     } else {
       setMovieData(initialValue);
       setFile(null);
+      setSelectedGenres([]); 
     }
   }, [movieToEdit, show]);
 

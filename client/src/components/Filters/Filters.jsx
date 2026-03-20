@@ -1,6 +1,6 @@
-import {Col, Form, Row} from 'react-bootstrap';
+import {Button, Col, Form, Row} from 'react-bootstrap';
 
-export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchChange}) => {
+export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchChange, onClearFilters}) => {
   return (
     <>
       <Form.Group className="mb-3">
@@ -46,11 +46,17 @@ export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchCha
               <option value="rating-high">Rating: Mayor a menor</option>
               <option value="rating-low">Rating: Menor a mayor</option>
               <option value="year_published-high">Año: Reciente a antigua</option>
-              <option value="year_published-low">Rating: Antigua a reciente</option>
+              <option value="year_published-low">Año: Antigua a reciente</option>
             </Form.Select>
           </Form.Group>
         </Col>
       </Row>
+
+      <div className="d-flex justify-content-end mb-3">
+        <Button variant="outline-secondary" size="sm" onClick={onClearFilters}>
+          Limpiar filtros
+        </Button>
+      </div>
     </>
   )
 }

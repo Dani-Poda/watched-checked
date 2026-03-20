@@ -139,9 +139,16 @@ function App() {
     return filtered;
   }
 
+  const handleClearFilters = () => {
+    setSearchText('');
+    setFilterType('');
+    setFilterStatus('');
+    setSortBy('newest');
+  }
+
   return (
     <div className="container mt-5">
-      <h1 className="text-center">Watched & Checked</h1>
+      <h1 className="text-center mb-4">Watched & Checked</h1>
 
       <FloatingAddButton onClick={handleAdd} />
       <AddMovieModal 
@@ -152,12 +159,15 @@ function App() {
         genres={genres} 
       />
 
-      <Filters 
-        onTypeChange={setFilterType} 
-        onStatusChange={setFilterStatus} 
-        onSortChange={setSortBy}
-        onSearchChange={setSearchText}
-      />
+      <div className='mb-4'>
+        <Filters
+          onTypeChange={setFilterType}
+          onStatusChange={setFilterStatus}
+          onSortChange={setSortBy}
+          onSearchChange={setSearchText}
+          onClearFilters={handleClearFilters}
+        />
+      </div>
 
       <MovieGrid movies={getFilteredMovies()} onCardClick={handleCardClick}/>
 
