@@ -16,6 +16,7 @@ function App() {
   const [filterType, setFilterType] = useState('');
   const [filterStatus, setFilterStatus] = useState('');
   const [sortBy, setSortBy] = useState('newest');
+  const [searchText, setSearchText] = useState('');
 
   const handleAdd = () => {
     setShowModal(true);
@@ -129,6 +130,11 @@ function App() {
     }else if (sortBy === 'year_published-low') {
       filtered.sort((a, b) => a.year_published -b.year_published);
     }
+
+    // Buscar por nombre
+    if (searchText && searchText !== '') {
+      filtered = filtered.filter(m => m.title.toLowerCase().includes(searchText.toLowerCase()));
+    }
     
     return filtered;
   }
@@ -146,7 +152,12 @@ function App() {
         genres={genres} 
       />
 
-      <Filters onTypeChange={setFilterType} onStatusChange={setFilterStatus} onSortChange={setSortBy}/>
+      <Filters 
+        onTypeChange={setFilterType} 
+        onStatusChange={setFilterStatus} 
+        onSortChange={setSortBy}
+        onSearchChange={setSearchText}
+      />
 
       <MovieGrid movies={getFilteredMovies()} onCardClick={handleCardClick}/>
 

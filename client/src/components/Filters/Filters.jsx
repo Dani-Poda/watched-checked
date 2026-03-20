@@ -1,8 +1,17 @@
 import {Col, Form, Row} from 'react-bootstrap';
 
-export const Filters = ({onTypeChange, onStatusChange, onSortChange}) => {
+export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchChange}) => {
   return (
     <>
+      <Form.Group className="mb-3">
+        <Form.Label>Busqueda</Form.Label>
+        <Form.Control 
+          type='text'
+          onChange={(e)=> onSearchChange(e.target.value)}
+        >
+        </Form.Control>
+      </Form.Group>
+
       <Row className='mb-4'>
         <Col md={3}>
           <Form.Group>
