@@ -147,39 +147,46 @@ function App() {
   }
 
   return (
-    <div className="container mt-5">
-      <h1 className="text-center mb-4">Watched & Checked</h1>
+    <div className='main-wrapper'>
+      <div className="container mt-5">
+        <header className="text-center mb-5">
+          <h1 className="display-1">Watched & Checked</h1>
+          <p className="text-muted">Tu biblioteca personal de cine</p>
+        </header>
 
-      <FloatingAddButton onClick={handleAdd} />
-      <AddMovieModal 
-        show={showModal} 
-        onClose={handleClose} 
-        onSave={handleSave}
-        movieToEdit={movieToEdit} 
-        genres={genres} 
-      />
+        <section className="filter-section p-4 mb-5 shadow-sm">
+          <Filters
+            onTypeChange={setFilterType}
+            onStatusChange={setFilterStatus}
+            onSortChange={setSortBy}
+            onSearchChange={setSearchText}
+            onClearFilters={handleClearFilters}
+          />
+        </section>
 
-      <div className='mb-4'>
-        <Filters
-          onTypeChange={setFilterType}
-          onStatusChange={setFilterStatus}
-          onSortChange={setSortBy}
-          onSearchChange={setSearchText}
-          onClearFilters={handleClearFilters}
+        <MovieGrid movies={getFilteredMovies()} onCardClick={handleCardClick}/>
+
+        <FloatingAddButton onClick={handleAdd} />
+
+        <AddMovieModal
+          show={showModal}
+          onClose={handleClose}
+          onSave={handleSave}
+          movieToEdit={movieToEdit}
+          genres={genres}
         />
+
+
+        {selectedMovie &&
+          <MovieDetailModal
+            show={showDetailModal}
+            onClose={handleCloseDetail}
+            movie= {selectedMovie}
+            onEdit={handleEdit}
+            onDelete={handleDelete}
+          />
+        }
       </div>
-
-      <MovieGrid movies={getFilteredMovies()} onCardClick={handleCardClick}/>
-
-      {selectedMovie && 
-        <MovieDetailModal 
-          show={showDetailModal}
-          onClose={handleCloseDetail}
-          movie= {selectedMovie}
-          onEdit={handleEdit}
-          onDelete={handleDelete}
-        />
-      }
     </div>
   )
 }

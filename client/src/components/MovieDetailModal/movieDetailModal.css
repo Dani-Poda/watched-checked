@@ -1,0 +1,67 @@
+.detail-modal .modal-content {
+  background-color: #1a1a2e; 
+  color: white;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+}
+
+.detail-poster {
+  border-radius: 12px;
+  max-height: 500px;
+  object-fit: cover;
+}
+
+.detail-content {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.detail-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 2.5rem;
+  letter-spacing: -0.5px;
+}
+
+.detail-year {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  font-weight: 300;
+}
+
+.detail-rating {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #ffc107;
+}
+
+.info-grid {
+  display: flex;
+  gap: 30px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 15px 0;
+}
+
+.detail-text-section h6 {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: #8e44ad;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.notes-box {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  border-left: 4px solid #8e44ad;
+  font-style: italic;
+}
+
+
+.btn-close {
+  filter: invert(1) grayscale(100%) brightness(200%);
+}
