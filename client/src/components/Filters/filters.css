@@ -1,7 +1,55 @@
+.filters-wrapper {
+  padding: 0 15px;
+}
+
 .filters-container {
-  background-color: white;
+  color-scheme: dark; /* Esto es magia pura para los selects nativos */
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
   padding: 1.5rem;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin-bottom: 2rem;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 2.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+
+.filter-label {
+  color: #aaa;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+.search-input, .filter-select {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  border-radius: 12px !important;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus, .filter-select:focus {
+  border-color: #3498db !important;
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25) !important;
+}
+
+.search-icon {
+  background-color: rgba(0, 0, 0, 0.2) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-right: none !important;
+  color: #666;
+  border-radius: 12px 0 0 12px !important;
+}
+
+.clear-btn {
+  font-size: 1.5rem;
+  padding: 0;
+  margin-bottom: 5px;
+  transition: transform 0.2s ease;
+}
+
+.clear-btn:hover {
+  transform: rotate(-15deg) scale(1.2);
 }

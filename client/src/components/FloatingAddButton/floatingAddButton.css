@@ -1,8 +1,49 @@
-.addButton {
+.floating-add-btn {
   position: fixed;
   bottom: 2rem;
   right: 2rem;
-  width: 64px;
-  height: 64px;
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  /* Gradiente moderno */
+  background: linear-gradient(135deg, #3498db, #2980b9);
+  color: white;
+  border: none;
+  cursor: pointer;
   z-index: 1000;
+  
+  /* Sombra para dar profundidad */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.plus-icon {
+  font-size: 32px;
+  font-weight: 300;
+  line-height: 1;
+}
+
+/* Efectos de interacción */
+.floating-add-btn:hover {
+  transform: scale(1.1) rotate(90deg); /* El botón crece y el '+' gira */
+  background: linear-gradient(135deg, #2ecc71, #27ae60); /* Cambia a verde al hover */
+  box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+}
+
+.floating-add-btn:active {
+  transform: scale(0.9);
+}
+
+
+@media (max-width: 576px) {
+  .floating-add-btn {
+    bottom: 1.5rem;
+    right: 1.5rem;
+    width: 55px;
+    height: 55px;
+  }
 }

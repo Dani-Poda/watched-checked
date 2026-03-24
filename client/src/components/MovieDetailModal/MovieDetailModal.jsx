@@ -60,7 +60,7 @@ export const MovieDetailModal = ({show, onClose, movie, onEdit, onDelete}) => {
               </div>
 
               {movie.genres && (
-                <div className="mb-4">
+                <div className="mb-4 d-flex flex-wrap gap-2">
                   {movie.genres.map(genre => (
                     <span key={genre.genre_id} className={`genre-badge ${getGenreClass(genre.genre_name)}`}>
                       {genre.genre_name}
@@ -71,7 +71,7 @@ export const MovieDetailModal = ({show, onClose, movie, onEdit, onDelete}) => {
 
               <div className='detail-text-section'>
                 <h6>Sinopsis</h6>
-                <p className='text-muted'>{movie.synopsis || "Sin sinopsis disponible."}</p>
+                <p className='detail-synopsis'>{movie.synopsis || "Sin sinopsis disponible."}</p>
                 
                 {movie.notes && (
                   <>

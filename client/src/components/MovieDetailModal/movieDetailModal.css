@@ -46,21 +46,32 @@
 
 .detail-text-section h6 {
   text-transform: uppercase;
-  font-size: 0.8rem;
-  letter-spacing: 1px;
-  color: #8e44ad;
-  margin-bottom: 10px;
-  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  color: #a29bfe;
+  margin-top: 1.5rem;
+  margin-bottom: 12px;
+  font-weight: 800;
 }
+
+.detail-synopsis {
+  color: rgba(255, 255, 255, 0.85); 
+  line-height: 1.7; 
+  font-size: 1.05rem;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
 
 .notes-box {
-  background: rgba(255, 255, 255, 0.05);
-  padding: 15px;
-  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.07);
+  padding: 18px;
+  border-radius: 12px;
   border-left: 4px solid #8e44ad;
   font-style: italic;
+  color: rgba(255, 255, 255, 0.95); 
+  line-height: 1.6;
 }
-
 
 .btn-close {
   filter: invert(1) grayscale(100%) brightness(200%);

@@ -151,7 +151,7 @@ function App() {
       <div className="container mt-5">
         <header className="text-center mb-5">
           <h1 className="display-1">Watched & Checked</h1>
-          <p className="text-muted">Tu biblioteca personal de cine</p>
+          <p className="text-white-50">Tu biblioteca personal de cine</p>
         </header>
 
         <section className="filter-section p-4 mb-5 shadow-sm">
