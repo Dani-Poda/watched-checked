@@ -45,7 +45,7 @@ export const MovieCard = ({ movie, onClick }) => {
         <Card.Title className="movie-card-title">{movie.title}</Card.Title>
 
         <div className="movie-card-info">
-          <span className="year-text text-muted">{movie.year_published}</span>
+          <span className="year-text text-white-50">{movie.year_published}</span>
           <div className="genre-container mt-2">
             {movie.genres?.slice(0, 2).map(genre => (
               <span 
