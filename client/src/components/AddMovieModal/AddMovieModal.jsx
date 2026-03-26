@@ -119,7 +119,7 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
                   <Form.Label>Año de estreno</Form.Label>
                   <Form.Control 
                     type="number" 
-                    placeholder="Añade el título de la película"
+                    placeholder="En qué año se estrenó"
                     name="year_published"
                     onChange={handleChange}
                     value={movieData.year_published}
@@ -131,7 +131,7 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
                   <Form.Label>Año de visionado</Form.Label>
                   <Form.Control 
                     type="number" 
-                    placeholder="Añade el título de la película"
+                    placeholder="En qué año la viste"
                     name="year_watched"
                     onChange={handleChange}
                     value={movieData.year_watched}
@@ -143,7 +143,7 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
                 <Form.Group className="mb-3" controlId="rating">
                   <Form.Label>Rating</Form.Label>
                   <Form.Select onChange={handleChange} value={movieData.rating} id='rating' name='rating' >
-                    <option>Puntua</option>
+                    <option disabled>Puntua</option>
                     <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
@@ -247,7 +247,7 @@ export const AddMovieModal = ({show, onClose, onSave, movieToEdit, genres}) => {
                   <Form.Control 
                     as="textarea" 
                     rows={3}
-                    placeholder="Añade el título de la película"
+                    placeholder="Añade tu opinión"
                     name="notes"
                     onChange={handleChange}
                     value={movieData.notes}

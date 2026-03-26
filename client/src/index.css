@@ -73,3 +73,17 @@ h1 {
   -webkit-text-fill-color: transparent;
   letter-spacing: -1px;
 }
+
+/* Esto cubre Chrome, Firefox, Edge y Safari */
+.custom-form .form-control::placeholder,
+.custom-form .form-select::placeholder,
+.search-input::placeholder {
+  color: rgba(255, 255, 255, 0.4) !important;
+  font-style: italic; /* Un toque visual para diferenciarlo del texto real */
+  font-weight: 300;
+}
+
+/* En algunos navegadores (como Firefox), el placeholder tiene opacidad por defecto, la forzamos a 1 */
+.custom-form .form-control::-moz-placeholder {
+  opacity: 1;
+}

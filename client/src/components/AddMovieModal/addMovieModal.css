@@ -96,3 +96,23 @@
 .status-chip-item label.status-2 { background-color: #f1c40f; color: black; }
 .status-chip-item label.status-3 { background-color: #3498db; color: white; }
 .status-chip-item label.status-4 { background-color: #e74c3c; color: white; }
+
+/* 1. Forzamos el fondo del select y de todas sus opciones */
+.custom-form .form-select, 
+.custom-form .form-select option {
+  background-color: #1a1a2e !important; /* El color azul oscuro de tu modal */
+  color: white !important;
+}
+
+/* 2. Evitamos que el navegador "blanquee" el select al hacer clic */
+.custom-form .form-select:focus {
+  background-color: #1a1a2e !important;
+  color: white !important;
+  border-color: #3498db; /* Un borde azul para saber que está seleccionado */
+  box-shadow: 0 0 0 0.25rem rgba(52, 152, 219, 0.25);
+}
+
+/* 3. El truco definitivo: Color Scheme */
+.custom-form {
+  color-scheme: dark; 
+}
