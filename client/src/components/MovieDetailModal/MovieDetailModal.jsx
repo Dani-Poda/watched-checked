@@ -1,5 +1,6 @@
 import {Badge, Button, Modal} from 'react-bootstrap';
 import './movieDetailModal.css';
+import PlaceholderPoster from '../../assets/images/no_disponible.png';
 
 export const MovieDetailModal = ({show, onClose, movie, onEdit, onDelete}) => {
   if (!movie) return null;
@@ -26,11 +27,12 @@ export const MovieDetailModal = ({show, onClose, movie, onEdit, onDelete}) => {
           <div className='row'>
             {/* Columna Izquierda: Póster */}
             <div className='col-md-4 text-center'>
-              <img 
-                src={`http://localhost:4000${movie.poster}`} 
-                alt={movie.title} 
-                className="img-fluid detail-poster shadow-lg" 
-              />
+              {movie.poster ? (
+                <img className="img-fluid detail-poster shadow-lg" src={`http://localhost:4000${movie.poster}`} />
+              ) : (
+                <img className="img-fluid detail-poster shadow-lg" src={PlaceholderPoster}/>
+              )}
+
             </div>
 
             {/* Columna Derecha: Información */}

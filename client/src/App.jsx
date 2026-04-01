@@ -5,6 +5,7 @@ import { moviesAPI, genresAPI } from './services/api';
 import { MovieGrid } from './components/MovieGrid/MovieGrid';
 import { MovieDetailModal } from './components/MovieDetailModal/MovieDetailModal';
 import { Filters } from './components/Filters/Filters';
+import { Footer } from './components/Footer/Footer';
 
 function App() {
   const [showModal, setShowModal] = useState(false);
@@ -186,7 +187,10 @@ function App() {
             onDelete={handleDelete}
           />
         }
+
+        
       </div>
+      <Footer />
     </div>
   )
 }

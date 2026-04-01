@@ -1,5 +1,7 @@
 import { Card, Badge } from "react-bootstrap";
 import './movieCard.css';
+import PlaceholderPoster from '../../assets/images/no_disponible.png';
+
 
 export const MovieCard = ({ movie, onClick }) => {
   const getGenreClass = (genreName) => {
@@ -23,9 +25,7 @@ export const MovieCard = ({ movie, onClick }) => {
         {movie.poster ? (
           <Card.Img className="movie-card-poster" src={`http://localhost:4000${movie.poster}`} />
         ) : (
-          <div className="movie-card-poster-placeholder">
-            <span>🎬</span>
-          </div>
+          <Card.Img className="movie-card-poster-placeholder" src={PlaceholderPoster}/>
         )}
       </div>
 
