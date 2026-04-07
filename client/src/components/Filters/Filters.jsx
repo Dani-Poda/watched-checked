@@ -1,7 +1,7 @@
 import {Button, Col, Form, InputGroup, Row} from 'react-bootstrap';
 import './filters.css';
 
-export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchChange, onClearFilters}) => {
+export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchChange, onClearFilters, filterType, filterStatus, sortBy, searchText}) => {
   return (
     <>
       <div className='filters-wrapper'>
@@ -16,6 +16,7 @@ export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchCha
                     type='text'
                     placeholder="Buscar por título..."
                     onChange={(e)=> onSearchChange(e.target.value)}
+                    value={searchText}
                     className="search-input"
                   >
                   </Form.Control>
@@ -26,7 +27,7 @@ export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchCha
             <Col lg={2} md={4}>
               <Form.Group>
                 <Form.Label className='filter-label'>Tipo</Form.Label>
-                <Form.Select onChange={(e)=> onTypeChange(e.target.value)} className='filter-select'>
+                <Form.Select onChange={(e)=> onTypeChange(e.target.value)} value={filterType} className='filter-select'>
                   <option value=''>Todas</option>
                   <option value='1'>Películas</option>
                   <option value='2'>Series</option>
@@ -37,7 +38,7 @@ export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchCha
             <Col log={2} md={4}>
               <Form.Group>
                 <Form.Label className="filter-label">Estado</Form.Label>
-                <Form.Select onChange={(e)=> onStatusChange(e.target.value)} className="filter-select">
+                <Form.Select onChange={(e)=> onStatusChange(e.target.value)} value={filterStatus} className="filter-select">
                   <option value=''>Todos</option>
                   <option value='1'>Vista</option>
                   <option value='2'>Pendiente</option>
@@ -50,7 +51,7 @@ export const Filters = ({onTypeChange, onStatusChange, onSortChange, onSearchCha
             <Col lg={3} md={4}>
               <Form.Group>
                 <Form.Label className="filter-label">Ordenar</Form.Label>
-                <Form.Select onChange={(e) => onSortChange(e.target.value)} className="filter-select">
+                <Form.Select onChange={(e) => onSortChange(e.target.value)} value={sortBy} className="filter-select">
                   <option value="newest">📅 Agregada: Recientes</option>
                   <option value="oldest">📅 Agregada: Antiguas</option>
                   <option value="rating-high">⭐ Rating: Mejor puntuadas</option>

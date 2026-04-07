@@ -67,8 +67,22 @@ function App() {
   }
 
   useEffect(()=>{
-    fetchMovies();
-    fetchGenres();
+    const loadInitialData = async () => {
+      try {
+
+        const [movieResponse, genreResponse] = await Promise.all([
+          moviesAPI.getAll(),
+          genresAPI.getAll()
+        ]);
+
+        setMovies(movieResponse.data);
+        setGenres(genreResponse.data);
+      } catch (error) {
+        console.error('Error cargando datos iniciales', error);
+      }
+    }
+
+    loadInitialData();
   },[])
 
   const handleCardClick = (movie)=> {
@@ -92,15 +106,6 @@ function App() {
     } catch (error) {
       console.log('Error:', error);
       alert('Error al eliminar');
-    }
-  }
-
-  const fetchGenres = async()=> {
-    try {
-      const response = await genresAPI.getAll();
-      setGenres(response.data);
-    } catch (error) {
-      console.log('Error:', error);
     }
   }
 
@@ -162,6 +167,10 @@ function App() {
             onSortChange={setSortBy}
             onSearchChange={setSearchText}
             onClearFilters={handleClearFilters}
+            filterType={filterType}
+            filterStatus={filterStatus}
+            sortBy={sortBy}
+            searchText={searchText} 
           />
         </section>
 

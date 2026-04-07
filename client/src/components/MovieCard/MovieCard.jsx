@@ -15,6 +15,8 @@ export const MovieCard = ({ movie, onClick }) => {
     return `genre-${normalized}`;
   }
 
+  const finalTitle = movie?.title.length > 50 ? `${movie.title.slice(0, 50)}...` : movie.title;
+
   return (
     <Card className="movie-card" onClick={() => onClick(movie)}>
       <div className="poster-wrapper">
@@ -42,7 +44,7 @@ export const MovieCard = ({ movie, onClick }) => {
         </div>
 
         {/* Título fuera del d-flex anterior para que ocupe su propia línea */}
-        <Card.Title className="movie-card-title">{movie.title}</Card.Title>
+        <Card.Title className="movie-card-title">{finalTitle}</Card.Title>
 
         <div className="movie-card-info">
           <span className="year-text text-white-50">{movie.year_published}</span>
